@@ -1,0 +1,278 @@
+@import "./config";
+
+body {
+  padding: 1.5rem;
+  background: $primary-color;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+header {
+  @include displayType(row);
+  padding: 0.5rem;
+  border: $header-outline 2px solid;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: auto;
+
+  @include tablet {
+    width: 85%;
+  }
+
+  @include desktop {
+    padding: 1.2rem;
+  }
+
+  .title {
+    margin-left: 1rem;
+    color: $neutral-color;
+    font-size: 1.3rem;
+
+    @include tablet {
+      font-size: 1.8rem;
+    }
+
+    @include desktop {
+      font-size: 2.2rem;
+    }
+
+    h3 {
+      line-height: 0.8;
+    }
+  }
+
+  .score {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    color: $score-text;
+    background: $neutral-color;
+    border-radius: 5px;
+
+    @include desktop {
+      padding: 0.5rem 2rem;
+    }
+
+    &__number {
+      color: $primary-color;
+      font-size: 2.5rem;
+      font-weight: map-get($font-weights, "bolder");
+
+      @include tablet {
+        font-size: 3.5rem;
+      }
+
+      @include desktop {
+        font-size: 4.5rem;
+      }
+    }
+
+    &__text {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+
+      @include tablet {
+        font-size: 1rem;
+      }
+
+      @include desktop {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+.container {
+  margin: 10rem auto 0;
+  width: 60%;
+  height: 15rem;
+  background: url("/dist/img/bg-triangle.svg") center/contain no-repeat;
+  position: relative;
+  transform: scaleY(0.9);
+  max-width: 270px;
+
+  @include tablet {
+    transform: scale(1.6);
+    margin: 15rem auto 0;
+  }
+
+  @include desktop {
+    transform: scale(1.9);
+    margin: 15rem auto 0;
+  }
+
+  .choice {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    position: absolute;
+    background: $neutral-color;
+    cursor: pointer;
+
+    @include desktop {
+      width: 140px;
+      height: 140px;
+    }
+  }
+
+  .paper {
+    left: 0;
+    transform: translate(-40%, -20%);
+    border: $paper 15px solid;
+
+    @include tablet {
+      transform: translate(-40%, -30%);
+    }
+
+    @include desktop {
+      transform: translate(-25%, -30%);
+    }
+  }
+
+  .scissors {
+    right: 0;
+    transform: translate(40%, -20%);
+    border: 15px solid $scissors;
+
+    @include tablet {
+      transform: translate(40%, -30%);
+    }
+
+    @include desktop {
+      transform: translate(25%, -30%);
+    }
+  }
+
+  .rock {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border: 15px solid $rock;
+  }
+
+  .icon {
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-60%, -50%);
+  }
+
+  .pickText {
+    display: none;
+    color: $neutral-color;
+    position: absolute;
+    font-weight: map-get($font-weights, "bold");
+    font-size: 1.2rem;
+  }
+
+  .userPickText {
+    left: -17%;
+    top: 50%;
+
+    @include tablet {
+      left: -12%;
+    }
+
+    @include desktop {
+      left: -6%;
+    }
+  }
+
+  .housePickText {
+    right: -24%;
+    top: 50%;
+
+    @include tablet {
+      right: -18%;
+    }
+
+    @include desktop {
+      right: -8%;
+    }
+  }
+}
+
+.btn {
+  width: 40%;
+  padding: 0.7rem 2rem;
+  font-size: 1.5rem;
+  font-weight: map-get($font-weights, "bold");
+  letter-spacing: 2px;
+  border: $header-outline 2px solid;
+  border-radius: 10px;
+  position: absolute;
+  transform: translate(-50%, 50%);
+  cursor: pointer;
+}
+
+.rules {
+  max-width: 150px;
+  background: $primary-color;
+  color: $neutral-color;
+  left: 50%;
+  bottom: 10%;
+
+  @include desktop {
+    left: unset;
+    right: 5%;
+    transform: translate(0, 0);
+  }
+}
+
+.activeChoice {
+  left: 0;
+  transform: translate(-40%, -20%);
+
+  @include tablet {
+    transform: translate(-40%, -30%);
+  }
+
+  @include desktop {
+    transform: translate(-25%, -30%);
+  }
+}
+
+.houseSpace {
+  right: 0;
+  transform: translate(40%, -20%);
+  @include tablet {
+    transform: translate(40%, -30%);
+  }
+
+  @include desktop {
+    transform: translate(25%, -30%);
+  }
+}
+
+.houseChoice {
+  right: 0;
+  transform: translate(40%, -20%);
+
+  @include tablet {
+    transform: translate(40%, -30%);
+  }
+
+  @include desktop {
+    transform: translate(25%, -30%);
+  }
+}
+
+.results {
+  margin-bottom: 2rem;
+  position: relative;
+  @include displayType(column);
+  font-size: 3rem;
+  color: $neutral-color;
+  display: none;
+  text-align: center;
+
+  .playAgain {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 70%;
+    max-width: 300px;
+    text-align: center;
+  }
+}

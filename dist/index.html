@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RPS</title>
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <header>
+      <div class="title">
+        <h3>ROCK</h3>
+        <h3>PAPER</h3>
+        <h3>SCISSORS</h3>
+      </div>
+      <div class="score">
+        <p class="score__text">SCORE</p>
+        <h3 class="score__number">12</h3>
+      </div>
+    </header>
+
+    <main class="container">
+      <p class="pickText userPickText">YOU PICKED</p>
+      <p class="pickText housePickText">HOUSE PICKED</p>
+
+      <div class="choice paper">
+        <img
+          class="paper__img icon"
+          src="./img/icon-paper.svg"
+          alt="paper img"
+        />
+      </div>
+      <div class="choice scissors">
+        <img
+          class="scissors__img icon"
+          src="./img/icon-scissors.svg"
+          alt="scissors img"
+        />
+      </div>
+      <div class="choice rock">
+        <img class="rock__img icon" src="./img/icon-rock.svg" alt="rock img" />
+      </div>
+    </main>
+
+    <div class="results">
+      <h3 class="results__comment">YOU WIN</h3>
+      <button class="playAgain btn">PLAY AGAIN</button>
+    </div>
+    <button class="rules btn">RULES</button>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

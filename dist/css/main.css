@@ -1,0 +1,304 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Barlow Semi Condensed", serif;
+}
+
+body {
+  padding: 1.5rem;
+  background: hsl(229, 25%, 31%);
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 0.5rem;
+  border: hsl(217, 16%, 45%) 2px solid;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: auto;
+}
+@media (min-width: 768px) {
+  header {
+    width: 85%;
+  }
+}
+@media (min-width: 1366px) {
+  header {
+    padding: 1.2rem;
+  }
+}
+header .title {
+  margin-left: 1rem;
+  color: hsl(0, 0%, 100%);
+  font-size: 1.3rem;
+}
+@media (min-width: 768px) {
+  header .title {
+    font-size: 1.8rem;
+  }
+}
+@media (min-width: 1366px) {
+  header .title {
+    font-size: 2.2rem;
+  }
+}
+header .title h3 {
+  line-height: 0.8;
+}
+header .score {
+  padding: 0.5rem 1rem;
+  text-align: center;
+  color: hsl(229, 64%, 46%);
+  background: hsl(0, 0%, 100%);
+  border-radius: 5px;
+}
+@media (min-width: 1366px) {
+  header .score {
+    padding: 0.5rem 2rem;
+  }
+}
+header .score__number {
+  color: hsl(229, 25%, 31%);
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+@media (min-width: 768px) {
+  header .score__number {
+    font-size: 3.5rem;
+  }
+}
+@media (min-width: 1366px) {
+  header .score__number {
+    font-size: 4.5rem;
+  }
+}
+header .score__text {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+@media (min-width: 768px) {
+  header .score__text {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 1366px) {
+  header .score__text {
+    font-size: 1.2rem;
+  }
+}
+
+.container {
+  margin: 10rem auto 0;
+  width: 60%;
+  height: 15rem;
+  background: url("/dist/img/bg-triangle.svg") center/contain no-repeat;
+  position: relative;
+  transform: scaleY(0.9);
+  max-width: 270px;
+}
+@media (min-width: 768px) {
+  .container {
+    transform: scale(1.6);
+    margin: 15rem auto 0;
+  }
+}
+@media (min-width: 1366px) {
+  .container {
+    transform: scale(1.9);
+    margin: 15rem auto 0;
+  }
+}
+.container .choice {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: absolute;
+  background: hsl(0, 0%, 100%);
+  cursor: pointer;
+}
+@media (min-width: 1366px) {
+  .container .choice {
+    width: 140px;
+    height: 140px;
+  }
+}
+.container .paper {
+  left: 0;
+  transform: translate(-40%, -20%);
+  border: hsl(230, 89%, 62%) 15px solid;
+}
+@media (min-width: 768px) {
+  .container .paper {
+    transform: translate(-40%, -30%);
+  }
+}
+@media (min-width: 1366px) {
+  .container .paper {
+    transform: translate(-25%, -30%);
+  }
+}
+.container .scissors {
+  right: 0;
+  transform: translate(40%, -20%);
+  border: 15px solid hsl(39, 89%, 49%);
+}
+@media (min-width: 768px) {
+  .container .scissors {
+    transform: translate(40%, -30%);
+  }
+}
+@media (min-width: 1366px) {
+  .container .scissors {
+    transform: translate(25%, -30%);
+  }
+}
+.container .rock {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border: 15px solid hsl(349, 71%, 52%);
+}
+.container .icon {
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-60%, -50%);
+}
+.container .pickText {
+  display: none;
+  color: hsl(0, 0%, 100%);
+  position: absolute;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.container .userPickText {
+  left: -17%;
+  top: 50%;
+}
+@media (min-width: 768px) {
+  .container .userPickText {
+    left: -12%;
+  }
+}
+@media (min-width: 1366px) {
+  .container .userPickText {
+    left: -6%;
+  }
+}
+.container .housePickText {
+  right: -24%;
+  top: 50%;
+}
+@media (min-width: 768px) {
+  .container .housePickText {
+    right: -18%;
+  }
+}
+@media (min-width: 1366px) {
+  .container .housePickText {
+    right: -8%;
+  }
+}
+
+.btn {
+  width: 40%;
+  padding: 0.7rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  border: hsl(217, 16%, 45%) 2px solid;
+  border-radius: 10px;
+  position: absolute;
+  transform: translate(-50%, 50%);
+  cursor: pointer;
+}
+
+.rules {
+  max-width: 150px;
+  background: hsl(229, 25%, 31%);
+  color: hsl(0, 0%, 100%);
+  left: 50%;
+  bottom: 10%;
+}
+@media (min-width: 1366px) {
+  .rules {
+    left: unset;
+    right: 5%;
+    transform: translate(0, 0);
+  }
+}
+
+.activeChoice {
+  left: 0;
+  transform: translate(-40%, -20%);
+}
+@media (min-width: 768px) {
+  .activeChoice {
+    transform: translate(-40%, -30%);
+  }
+}
+@media (min-width: 1366px) {
+  .activeChoice {
+    transform: translate(-25%, -30%);
+  }
+}
+
+.houseSpace {
+  right: 0;
+  transform: translate(40%, -20%);
+}
+@media (min-width: 768px) {
+  .houseSpace {
+    transform: translate(40%, -30%);
+  }
+}
+@media (min-width: 1366px) {
+  .houseSpace {
+    transform: translate(25%, -30%);
+  }
+}
+
+.houseChoice {
+  right: 0;
+  transform: translate(40%, -20%);
+}
+@media (min-width: 768px) {
+  .houseChoice {
+    transform: translate(40%, -30%);
+  }
+}
+@media (min-width: 1366px) {
+  .houseChoice {
+    transform: translate(25%, -30%);
+  }
+}
+
+.results {
+  margin-bottom: 2rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  font-size: 3rem;
+  color: hsl(0, 0%, 100%);
+  display: none;
+  text-align: center;
+}
+.results .playAgain {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%);
+  width: 70%;
+  max-width: 300px;
+  text-align: center;
+}/*# sourceMappingURL=main.css.map */
