@@ -83,7 +83,7 @@ header {
 }
 
 .container {
-  margin: 10rem auto 0;
+  margin: 7rem auto 0;
   width: 60%;
   height: 15rem;
   background: url("/dist/img/bg-triangle.svg") center/contain no-repeat;
@@ -92,8 +92,8 @@ header {
   max-width: 270px;
 
   @include tablet {
-    transform: scale(1.6);
-    margin: 15rem auto 0;
+    transform: scale(1.4);
+    margin: 12rem auto 0;
   }
 
   @include desktop {
@@ -167,7 +167,7 @@ header {
 
   .userPickText {
     left: -17%;
-    top: 50%;
+    top: 45%;
 
     @include tablet {
       left: -12%;
@@ -180,7 +180,7 @@ header {
 
   .housePickText {
     right: -24%;
-    top: 50%;
+    top: 45%;
 
     @include tablet {
       right: -18%;
@@ -219,7 +219,7 @@ header {
   }
 }
 
-.activeChoice {
+.playerChoice {
   left: 0;
   transform: translate(-40%, -20%);
 
@@ -258,21 +258,86 @@ header {
 }
 
 .results {
-  margin-bottom: 2rem;
-  position: relative;
+  position: absolute;
+  top: 75%;
+  width: 100%;
   @include displayType(column);
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: $neutral-color;
   display: none;
   text-align: center;
+
+  @include tablet {
+    top: 60%;
+  }
 
   .playAgain {
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translate(-50%);
-    width: 70%;
-    max-width: 300px;
+    margin-top: 0.5rem;
+    width: 110%;
+    padding: 0.7rem 1rem;
+    max-width: 200px;
     text-align: center;
   }
+}
+
+.finalDesktopView {
+  @include desktop {
+    @include displayType(row);
+    justify-content: space-between;
+    max-width: 500px;
+    margin: 17rem auto 0;
+
+    .userPickText {
+      @include desktop {
+        left: -3%;
+        top: 70%;
+      }
+    }
+
+    .housePickText {
+      @include desktop {
+        right: -5%;
+        top: 70%;
+      }
+    }
+
+    .results {
+      position: relative;
+      top: -30%;
+      left: 0;
+    }
+  }
+}
+
+.rules__container {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translateY(100%);
+  width: 100vw;
+  height: 100vh;
+  @include displayType(row);
+  justify-content: center;
+  background: rgb(232, 228, 228);
+  transition: transform 1s ease-in-out;
+
+  #{&}-img {
+    height: 60%;
+    width: 60%;
+    object-fit: contain;
+  }
+}
+
+.rules-close {
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  z-index: 100;
+  width: 35px;
+  height: 35px;
+  display: none;
 }

@@ -1,14 +1,17 @@
-const choices = ["rock", "paper", "scissors"];
-const players = ["user", "computer"];
 const userScoreEl = document.querySelector(".score__number");
 const resultComment = document.querySelector(".results__comment");
 const resultContainer = document.querySelector(".results");
 const playAgainBtn = document.querySelector(".playAgain");
+const pickTexts = [...document.querySelectorAll(".pickText")];
+const iChoicesEl = [...document.querySelectorAll(".choice")];
+const choicesContainer = document.querySelector(".container");
+const rulesBtn = document.querySelector(".rules");
+const rulesContainer = document.querySelector(".rules__container");
+const closeBtn = document.querySelector(".rules-close");
 
-let playerChoice;
-let activePlayer;
-let userScore = 12;
-let message;
+const choices = ["rock", "paper", "scissors"];
+let fChoicesEl = [];
+let userScore = 2;
 let playing = true;
 
 const choiceColors = {
@@ -17,108 +20,118 @@ const choiceColors = {
   rock: "hsl(349, 71%, 52%)",
 };
 
-//selecting the choices
-const choicesContainer = document.querySelector(".container");
-let choicesEl;
+rulesBtn.addEventListener("click", function () {
+  rulesContainer.style.transform = "translateY(0)";
+  closeBtn.style.display = "block";
+});
 
+closeBtn.addEventListener("click", function () {
+  if (rulesContainer.style.transform === "translateY(0px)") {
+    rulesContainer.style.transform = "translateY(100%)";
+    closeBtn.style.display = "none";
+  }
+});
+
+//selecting the choices2
 choicesContainer.addEventListener("click", function (e) {
   if (playing) {
     if (e.target === e.currentTarget) return;
-    const selectedContainer = e.target.closest(".choice");
-    console.log(selectedContainer);
+    const playerChoice = e.target.closest(".choice");
 
-    if (selectedContainer.tagName === "DIV") {
-      //when selecting tagName, it should be in caps;
-      choicesEl = document.querySelectorAll(".choice");
-      console.log(choicesEl);
-      choicesEl.forEach((choice) => {
-        choice.style.display = "none";
-        choicesContainer.style.background = "none";
+    if (playerChoice.tagName !== "DIV") return;
+    //when selecting tagName, it should be in caps;
 
-        if (choice === selectedContainer) {
-          const choiceClass = choice.classList[1];
-          console.log(choiceClass);
-          choice.style.display = "block";
-          choice.classList.remove(`${choiceClass}`);
-          choice.classList.add("activeChoice");
-          choice.style.border = `15px solid ${choiceColors[choiceClass]} `;
+    iChoicesEl.forEach((choice) => {
+      choice.style.display = "none";
+      choicesContainer.style.background = "none";
 
-          const houseSpace = document.createElement("div");
-          choicesContainer.append(houseSpace);
-          houseSpace.classList.add("choice", "houseSpace");
-          houseSpace.style.backgroundColor = `${choiceColors.paper}`;
+      if (choice !== playerChoice) return;
+      const playerClass = choice.classList[1];
+      const playerChoiceEl = document.createElement("div");
+      console.log(playerClass);
 
-          const pickTexts = [...document.querySelectorAll(".pickText")];
-          pickTexts.forEach((text) => (text.style.display = "block"));
+      //a function that creates a cloned div of selected container.
+      const displayChoiceEl = function (choiceEl, classPicked, addedClass) {
+        choiceEl.classList.add("choice", addedClass);
+        choiceEl.style.border = `15px solid ${choiceColors[classPicked]}`;
+        const imgHtml = `<img class="${classPicked}__img icon" src="./img/icon-${classPicked}.svg" alt="${classPicked} img"/>`;
+        choiceEl.innerHTML = imgHtml;
+        choicesContainer.append(choiceEl);
+        fChoicesEl.push(choiceEl);
+      };
 
-          const housePickTimeOut = function () {
-            const pickNum = Math.ceil(Math.random() * 3) - 1;
-            const houseClass = choices[pickNum];
-            choicesEl = [...document.querySelectorAll(".choice")];
-            console.log(choiceClass, pickNum, houseClass);
+      //displaying th clone of the selected container  (playerChoice)
+      displayChoiceEl(playerChoiceEl, playerClass, "playerChoice");
 
-            if (choiceClass === houseClass) {
-              console.log("the same thing");
-              const houseChoiceEl = document.createElement("div");
-              houseChoiceEl.classList.add("choice", "houseChoice");
-              houseChoiceEl.style.border = `15px solid ${choiceColors[houseClass]} `;
+      //creating an empty space div for the houseChoice to fill;
+      const houseSpace = document.createElement("div");
+      choicesContainer.append(houseSpace);
+      houseSpace.classList.add("choice", "houseSpace");
+      houseSpace.style.backgroundColor = `${choiceColors.paper}`;
+      fChoicesEl.push(houseSpace);
 
-              const imgHtml = `<img class="${houseClass}__img icon" src="./img/icon-${houseClass}.svg" alt="${houseClass} img"/>`;
-              houseChoiceEl.innerHTML = imgHtml;
-              choicesContainer.append(houseChoiceEl);
-            } else {
-              console.log("not the same");
-              const houseChoiceEl = choicesEl.find((choice) => {
-                if (choice.classList[1] === houseClass) return choice;
-              });
+      //displaying the text for the choices
+      pickTexts.forEach((text) => (text.style.display = "block"));
 
-              console.log(true, houseChoiceEl);
-              houseChoiceEl.classList.remove(`${houseClass}`);
-              houseChoiceEl.classList.add("houseChoice");
-              houseChoiceEl.style.border = `15px solid ${choiceColors[houseClass]} `;
-              houseSpace.style.display = "none";
-              houseChoiceEl.style.display = "block";
-            }
+      const housePickTimeOut = function () {
+        const pickNum = Math.ceil(Math.random() * 3) - 1;
+        const houseClass = choices[pickNum];
+        const houseChoiceEl = document.createElement("div");
 
-            //results
-            const displayResult = () =>
-              (resultContainer.style.display = "block");
-            if (choiceClass === houseClass) {
-              message = "IT'S A TIE";
-              resultComment.textContent = message;
-              userScore = 12;
-              userScoreEl.textContent = userScore;
-              displayResult();
-              playing = false;
-            } else if (
-              (choiceClass === "paper" && houseClass === "rock") ||
-              (choiceClass === "rock" && houseClass === "scissors") ||
-              (choiceClass === "scissors" && houseClass === "paper")
-            ) {
-              message = "YOU WIN";
-              resultComment.textContent = message;
-              userScore++;
-              userScoreEl.textContent = userScore;
-              displayResult();
-              playing = false;
-            } else {
-              message = "YOU LOSE";
-              resultComment.textContent = message;
-              userScore--;
-              userScoreEl.textContent = userScore;
-              displayResult();
-              playing = false;
-            }
-          };
+        //displaying the clone of the selected container (houseChoice)
+        displayChoiceEl(houseChoiceEl, houseClass, "houseChoice");
+        console.log(fChoicesEl);
 
-          setTimeout(housePickTimeOut, 2000);
+        //results
+        let message;
+
+        // displaying the result
+        const displayResult = (message) => {
+          resultComment.textContent = message;
+          resultContainer.style.display = "flex";
+          userScoreEl.textContent = userScore;
+          playing = false;
+          choicesContainer.classList.add("finalDesktopView");
+          if (userScore < 1) {
+            playAgainBtn.textContent = "GAME OVER";
+          }
+        };
+
+        if (playerClass === houseClass) {
+          message = "IT'S A TIE";
+          displayResult(message);
+        } else if (
+          (playerClass === "paper" && houseClass === "rock") ||
+          (playerClass === "rock" && houseClass === "scissors") ||
+          (playerClass === "scissors" && houseClass === "paper")
+        ) {
+          message = "YOU WIN";
+          userScore++;
+          displayResult(message);
+        } else {
+          message = "YOU LOSE";
+          userScore--;
+          displayResult(message);
         }
-      });
-    }
+      };
+
+      setTimeout(housePickTimeOut, 2000);
+    });
   }
 });
 
 playAgainBtn.addEventListener("click", function () {
-  playing = true;
-  resultContainer.style.display = "none";
+  if (userScore >= 1) {
+    fChoicesEl.forEach((el) => el.remove());
+    resultContainer.style.display = "none";
+    fChoicesEl = [];
+    choicesContainer.style.background =
+      "url('/dist/img/bg-triangle.svg') center/contain no-repeat";
+    pickTexts.forEach((text) => (text.style.display = "none"));
+    iChoicesEl.forEach((choice) => (choice.style.display = "block"));
+    if (choicesContainer.classList.contains("finalDesktopView")) {
+      choicesContainer.classList.remove("finalDesktopView");
+    }
+    playing = true;
+  }
 });
